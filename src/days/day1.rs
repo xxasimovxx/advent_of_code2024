@@ -1,10 +1,12 @@
 use std::fs;
+use std::collections::HashMap;
 
 pub fn solution(){
 
-    let file = read_file(String::from("inputs/input1_1.txt"));
+    let file = read_file(String::from("inputs/input1.txt"));
 
-    println!("{}", solve(file));
+    println!("Solution for first part: {}", solve1(file.clone()));
+    println!("Solution for second part: {}", solve2(file.clone()));
 
 }
 
@@ -21,13 +23,14 @@ fn read_file(path: String) -> (Vec<u32>,Vec<u32>) {
     let mut parts = contents.split_whitespace().map(|x| x.parse::<u32>());
     
     loop{
-    match parts.next() {
-        Some(Ok(part)) => numbers.push(part),
-        None => break,
-        _ => {}
+        match parts.next() {
 
-    }}
-    println!("{:?}", numbers);
+            None => break,
+            Some(Ok(part)) => numbers.push(part),
+            _ => {}
+
+        }
+    }
 
     for i in 0..(numbers.len())/2{
         vec_left.push(numbers[i * 2]);
@@ -42,59 +45,50 @@ fn read_file(path: String) -> (Vec<u32>,Vec<u32>) {
 
 }
 
-fn solve((vec_left, vec_right): (Vec<u32>,Vec<u32>)) -> u32{
+fn solve1((vec_left, vec_right): (Vec<u32>,Vec<u32>)) -> u32{
 
     let mut sum: u32 = 0;
-    /*
-    let mut range: (usize, usize) = (0,0); 
-    let mut range1: (u32, u32) ; 
-    let mut change: bool;
-    */
-    
+
     for i in 0..vec_left.len(){
         sum += vec_left[i].abs_diff(vec_right[i]);
     }
-/*
-    loop{
 
-        change = false;
-        println!("{}", vec.len());
-
-        for i in 0..vec.len()-1{
-
-            range1 = (vec[range.0].0,vec[range.1].1); 
-
-            let (x,y) = &mut vec[i];
-            if *x < range1.0{
-
-                range.0 = i;
-                range1.0 = *x;
-                change = true;
-
-            }
-
-            if *y < range1.1{
-
-                range.1 = i;
-                range1.1 = *y;
-                change = true;
-
-            }
-        }
-
-        if !change{
-            break;
-
-        }else{
-
-            sum += vec[range.0].0.abs_diff(vec[range.1].1);
-            vec[range.0].0 = u32::MAX;
-            vec[range.1].1 = u32::MAX;
-
-        }
-    }
-*/
     sum
 
 }
+
+fn solve2((vec_left, vec_right): (Vec<u32>,Vec<u32>)) -> u32{
+
+    let mut sum: u32 = 0;
+    let mut amount: u32;
+
+    let mut appear: HashMap<u32,u32> = HashMap::new();
+
+
+   for num in &vec_left{
+        if appear.get(num).copied().unwrap_or(0) == 0{
+
+            amount = u32::try_from(vec_right.iter().filter(|&x| x == num).count()).unwrap();
+            appear.insert(*num, amount);
+            sum += num * amount;
+
+        }else{
+
+            sum += num * appear.get(num).copied().unwrap_or(0);
+
+        }
+    } 
+
+    sum
+
+}
+
+
+
+
+
+
+
+
+
 
