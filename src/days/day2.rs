@@ -87,12 +87,11 @@ fn solve2(vec: Vec<Vec<i32>>) -> i32 {
         removed_first = false;
         temp = 0;
         i = 1;
-        let asd:bool = true;
+        let asd: bool = true;
 
         while i < vector.len() {
             diff = (vector[i - 1] - vector[i]).abs();
             if ((vector[i - 1] < vector[i]) != increasing) || diff < 1 || diff > 3 {
-
                 if i == 1 && !removed_first && asd {
                     errors += 1;
                     i = 1;
@@ -100,19 +99,15 @@ fn solve2(vec: Vec<Vec<i32>>) -> i32 {
                     temp = vector.clone()[i - 1];
                     vector.remove(i - 1);
                     continue;
-
-                } else if i == 1 && removed_first&& asd{
+                } else if i == 1 && removed_first && asd {
                     i = 1;
                     vector.remove(0);
                     vector.insert(0, temp);
-
-
                 } else {
                     vector.remove(i);
 
                     errors += 1;
                     i = 1;
-
                 }
             }
 
