@@ -2,7 +2,7 @@ use std::fs;
 
 pub fn solution() {
     let file = read_file(String::from("inputs/input4.txt"));
-     println!("{:?}", solve1(file.clone()));
+    println!("{:?}", solve1(file.clone()));
     println!("{:?}", solve2(file.clone()));
 }
 
@@ -20,8 +20,6 @@ fn read_file(path: String) -> Vec<Vec<char>> {
 
 fn solve1(string: Vec<Vec<char>>) -> u32 {
     let mut sum: u32 = 0;
-    let mut i: usize = 0;
-    let mut j: usize = 0;
 
     for i in 0..string.len() {
         for j in 0..string[i].len() {
@@ -164,11 +162,6 @@ fn solve2(string: Vec<Vec<char>>) -> u32 {
 }
 
 fn x_mas_count(string: &Vec<Vec<char>>, i: usize, j: usize) -> u32 {
-    /*
-    M S
-     A
-    M S
-    */
     let mut sum: u32 = 0;
     let mut temp: Vec<char> = vec![];
 
