@@ -9,8 +9,6 @@ pub fn solution() {
 
 fn solve1(string: String) -> i32 {
     let mut sum = 0;
-    let mut offset: usize;
-    let mut i: usize = 0;
     let re = Regex::new(r"mul\(\b([1-9]\d{0,3}),\s*([1-9]\d{0,3})\b\)").unwrap();
 
     for cap in re.captures_iter(&string) {

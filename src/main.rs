@@ -7,6 +7,6 @@ pub mod days;
 
 fn main() {
 
- crate::days::day4::solution();
+ crate::days::day6::solution();
 
 }

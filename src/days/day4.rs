@@ -9,7 +9,6 @@ pub fn solution() {
 fn read_file(path: String) -> Vec<Vec<char>> {
     let mut vec: Vec<Vec<char>> = vec![];
     let contents = fs::read_to_string(path).expect("no file");
-    let mut i: usize = 0;
 
     for str in contents.lines() {
         vec.push(str.chars().collect());
@@ -147,8 +146,6 @@ fn xmas_count(string: &Vec<Vec<char>>, i: usize, j: usize) -> u32 {
 
 fn solve2(string: Vec<Vec<char>>) -> u32 {
     let mut sum: u32 = 0;
-    let mut i: usize = 0;
-    let mut j: usize = 0;
 
     for i in 0..string.len() {
         for j in 0..string[i].len() {
